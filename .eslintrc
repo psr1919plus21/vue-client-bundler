@@ -1,0 +1,20 @@
+{
+  "parserOptions": {
+          "ecmaVersion": 2017,
+          "sourceType": "module",
+          "ecmaFeatures": {
+            "experimentalObjectRestSpread": true
+          }
+      },
+   "env": {
+        "browser": true,
+        "node": true
+    },
+    "extends": "eslint:recommended",
+    "rules": {
+      getter-return: "error",
+      no-multi-spaces: "error",
+      "no-console": 0,
+      "no-case-declarations": 0
+    }
+}
