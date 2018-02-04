@@ -1,4 +1,6 @@
-var path = require('path');
+const path = require('path');
+const webpack = require('webpack');
+const NODE_ENV = process.env.NODE_ENV;
 
 module.exports = {
   entry: {
@@ -8,8 +10,8 @@ module.exports = {
     path: path.resolve(__dirname, 'build/static/js/'),
     filename: '[name].js'
   },
-  watch: process.env.NODE_ENV === 'development' ? true : false,
-  devtool: process.env.NODE_ENV === 'development' ? 'inline-source-map' : null,
+  watch: NODE_ENV === 'development' ? true : false,
+  devtool: NODE_ENV === 'development' ? 'inline-source-map' : false,
 
   module: {
     rules: [
@@ -31,5 +33,18 @@ module.exports = {
     alias: {
       vue: 'vue/dist/vue.js'
     }
-  }
+  },
+
+  plugins: []
 };
+
+
+if (NODE_ENV === 'production') {
+  module.exports.plugins.push(
+    new webpack.optimize.UglifyJsPlugin({
+      warnings: false,
+      drop_console: true,
+      unsafe: true
+    })
+  );
+}
